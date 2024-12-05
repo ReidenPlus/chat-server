@@ -1,11 +1,23 @@
 cmake_minimum_required(VERSION 3.10)
-project(ChatServer)
+
+project(ChatServer VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(OpenSSL REQUIRED)
-
+# Источники и заголовки
 include_directories(include)
-add_executable(chat main.cpp src/ChatServer.cpp src/ChatClient.cpp src/Encryption.cpp)
+file(GLOB SOURCES src/*.cpp)
 
-target_link_libraries(chat OpenSSL::SSL OpenSSL::Crypto)
+# Основной исполняемый файл
+add_executable(chat-server main.cpp ${SOURCES})
+
+# Подключение Boost
+find_package(Boost REQUIRED COMPONENTS system)
+
+if (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    target_link_libraries(chat-server ${Boost_LIBRARIES})
+else()
+    message(FATAL_ERROR "Boost library not found!")
+endif()

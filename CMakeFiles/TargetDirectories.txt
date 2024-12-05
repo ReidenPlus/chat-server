@@ -1,0 +1,3 @@
+/home/reiden/chat-server/CMakeFiles/chat-server.dir
+/home/reiden/chat-server/CMakeFiles/edit_cache.dir
+/home/reiden/chat-server/CMakeFiles/rebuild_cache.dir
